@@ -1,0 +1,278 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>CS 424 project 1</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <style>
+  #container{ position : relative; height : 1080px; width: 1920px;}
+ 
+  
+   #lower
+  {
+  width : 1900px;
+  position: absolute;
+  border-style:solid;
+  border-width:5px;
+  height : 60px;
+  z-offset: 100;
+  top: 1000px;
+  
+  }
+  ul
+  {
+ align : center;
+  }
+  
+  .nav
+{
+	  
+   z-offset: 100;
+  list-style-type: none;
+  padding-right: 20px;
+  float: left;
+}
+  .nav li
+{
+position : relative;
+ display: inline;
+}
+
+ul div
+{
+display : inline;
+
+}
+
+
+
+ #kineticJS
+ {
+ z-offset: -1100;
+ width : 300px;
+ height : 300px;
+ 
+ }
+ #kineticJS *
+ {z-offset: -1100;
+ }
+ 
+ #kineticHolder
+ {
+ position: absolute;
+ top : 41px;
+ left : 0px;
+ height : 800px;
+ width : 1280px;
+ 
+ 
+ }
+ .btn
+ {
+
+ top : -10px;
+ }
+ 
+ #pointing{
+ z-offset : 1000;
+ position : absolute;
+ top : 580px;
+ left : 810px;
+ }
+ 
+ #legendBox
+ {
+ border-style:solid;
+  border-width:5px;
+ position : absolute;
+ z-offset: 999;
+ top : 65px;
+ left : 1545px;
+ 
+ width : 300px;
+ 
+ }
+ #legendBox ul { list-style-type:none;}
+ 
+ .example { 
+ z-offset : 9999;
+ width : 10px;
+ height : 10px;
+  border-style:solid;
+  border-width: 1px;
+ color : white;
+ }
+ 
+ 
+ 
+  </style>
+  
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+
+	<script src="js/utility_functions.js"></script>
+	<script src="js/kineticjs.js"></script>
+	<script src="js/objects.js"></script>
+	<script src="js/jquery-1.8.1.js"></script>
+	<script src="js/jqueryui.js"></script>
+	<script src="js/kineticShapes.js"></script>
+	<script src="js/googcharts.js"></script>
+	 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<div id = 'container'>
+		
+	
+			
+			
+
+			<img id = "pointing" src = "pointer.png" >
+			
+			<img id = "mapping" src = "mp2.png" style = "z-offest: 100; position : absolute; left : 27px; top : 67px; width : 650px; height  : 473px;">
+			<div id = 'lower'>
+			<ul class = 'nav' style = 'position: absolute; top : -7px;'>
+			<div>
+			<li>
+			<button class = "btn" onclick = "location.href = 'index.html'" >Home</button>
+			</li>
+			<li>
+			<li>
+			<button class =  'zoom btn btn-primary'>Zoom</button>
+			</li>
+			<li>
+			<button class = 'unzoom btn btn-primary' style = 'left : 500px;'>Unzoom</button>
+			</li>
+			<li>
+			<button id = 'hideChart' class = 'btn btn-primary'>Hide Chart</button>
+			</li>
+			</li>
+			<li>
+			<button id = 'hideOverlay' class = 'btn btn-primary'>Hide Overlay</button>
+			</li>
+			<li>
+			<button id = 'hideVisual' class = 'btn btn-primary'>Hide Visualisation</button>
+			</li>
+			
+			</div>
+			
+			<div>
+			<!-- toggle buttons -->
+			<li>
+			<button val = '0' turned = 'true' class = 'to btn btn-success data'>Tog: 0 - 10</button>
+			</li>
+			<li>
+			<button val = '1' turned = 'true' class = 'to btn btn-success data'>Tog: 11 - 20</button>
+			</li>
+			<li>
+			<button val = '2' turned = 'true' class = 'to btn btn-success data'>Tog: 21 - 40</button>
+			</li>
+			<li>
+			<button val = '3' turned = 'true' class = 'to btn btn-success data'>Tog: 41 - 60</button>
+			</li>
+			<li>
+			<button val = '4' turned = 'true' class = 'to btn btn-success data'>Tog: 61 - 80</button>
+			</li>
+			<li>
+			<button val = '5' turned = 'true' class = 'to btn btn-success data'>Tog: >80</button>
+			</li>
+			</li>
+			<li>
+			<button  val = '6' turned = 'true' class = 'to btn btn-success data'>Tog: Male</button>
+			</li>
+			</li>
+			<li>
+			<button  val = '7' turned = 'true' class = 'to btn btn-success data'>Tog: Female</button>
+			</li>
+			</li>
+			<li>
+			<button  val = '8' turned = 'true' class = 'to btn btn-success data'>Tog: Locale</button>
+			</li>
+			</div>
+			<!-- end of toggle buttons -->
+			</li>
+			<li>
+			<button id = 'legend' class = 'btn btn-primary' style = "width : 300px;">Reveal Legend</button>
+			</li>
+			</ul>
+			</div>
+			
+			<div id = "legendBox">
+				
+				<div style = "background-color : #573600;"> <span style = "color : white; "> Males </span></div> 
+				<div style = "background-color : teal;"> <span style = "color : white; "> Females </span></div> 
+				<div  style = "background-color : blue;"> <span style = "color : white; "> Water Well </span></div> 
+				<div style = "background-color : #BD3A00;"> <span style = "color : white; "> Work House </span></div> 
+				<div style = "background-color : purple;"> <span style = "color : white; "> Brewery </span></div> 
+				<div style = "background-color : #7D6F06;"> <span style = "color : white; "> Soho Square </span></div> 
+				<div style = "background-color : #360036;"> <span style = "color : white; "> Recent's Quadrant </span></div> 
+				<div style = "background-color : #004207;"> <span style = "color : white; "> Hanover Square</span></div> 
+			</div>
+			
+			<div id = 'kineticHolder'>
+			<div id = 'tester' style = 'background-color : black; position : absolute; z-offset:9999;'> </div>
+			<div id = 'kineticJS' > </div>
+			</div>
+	
+			<div id="chart_div" style="top: 685px; height : 400px; left : -100px;"></div>
+	</div> <!-- container -->
+	
+	<script>
+	
+	
+	
+   var multiplier = 25;
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(
+	function()
+	{
+	
+	 $(function()
+   {
+   drawChart();
+	
+	initDraw();
+	startY = $(".kineticjs-content").offset().top;
+	
+	initToggles();
+	$('.to').click(function(){console.log(globalAges);});
+	
+  }) //function
+	
+	
+	
+	
+	});//charts
+  /*
+   for(var a = 0; a < streets.length; a++)
+	{
+	
+	
+		for(var b = 0; b < streets[a].length; b++)
+			{streets[a][b] = streets[a][b]*multiplier;}
+	
+	
+	temp = ( new Kinetic.Line(
+	{
+	  points: streets[a],
+      stroke: 'red',
+      strokeWidth: 3,
+      lineCap: 'round',
+      lineJoin: 'round'
+	}));
+	arr.push(temp);
+	}
+  
+  */
+
+  </script>
+</body>
+</html>
